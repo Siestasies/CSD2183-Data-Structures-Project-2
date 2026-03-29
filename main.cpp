@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 struct Point {
@@ -155,6 +156,64 @@ bool find_steiner(Vertex* A, Vertex* B, Vertex* C, Vertex* D,
     return true;
 }
 
+// --- simple grid spatial index so intersection checks aren't O(n) ---
+
+struct Grid {
+    double ox, oy, cw, ch;
+    int nx, ny;
+    std::vector<std::vector<Vertex*>> cells;
+
+    void build(double x1, double y1, double x2, double y2, int n_verts) {
+        ox = x1 - 1; oy = y1 - 1;
+        int side = std::max(1, (int)std::sqrt((double)n_verts));
+        nx = ny = side;
+        cw = (x2 - x1 + 2) / nx;
+        ch = (y2 - y1 + 2) / ny;
+        cells.resize(nx * ny);
+    }
+
+    // get the range of grid cells that a bounding box overlaps
+    void bbox_cells(double x1, double y1, double x2, double y2,
+                    int& cx1, int& cy1, int& cx2, int& cy2) const {
+        cx1 = std::max(0,    (int)((std::min(x1,x2) - ox) / cw));
+        cy1 = std::max(0,    (int)((std::min(y1,y2) - oy) / ch));
+        cx2 = std::min(nx-1, (int)((std::max(x1,x2) - ox) / cw));
+        cy2 = std::min(ny-1, (int)((std::max(y1,y2) - oy) / ch));
+    }
+
+    void add(Vertex* v) {
+        int cx1, cy1, cx2, cy2;
+        bbox_cells(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y,
+                   cx1, cy1, cx2, cy2);
+        for (int r = cy1; r <= cy2; r++)
+            for (int c = cx1; c <= cx2; c++)
+                cells[r*nx + c].push_back(v);
+    }
+
+    void remove(Vertex* v) {
+        int cx1, cy1, cx2, cy2;
+        bbox_cells(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y,
+                   cx1, cy1, cx2, cy2);
+        for (int r = cy1; r <= cy2; r++)
+            for (int c = cx1; c <= cx2; c++) {
+                auto& cell = cells[r*nx + c];
+                cell.erase(std::remove(cell.begin(), cell.end(), v), cell.end());
+            }
+    }
+
+    // find all edge-start vertices near a bounding box (deduped)
+    void query(double x1, double y1, double x2, double y2,
+               std::vector<Vertex*>& out) const {
+        int cx1, cy1, cx2, cy2;
+        bbox_cells(x1, y1, x2, y2, cx1, cy1, cx2, cy2);
+        std::unordered_set<Vertex*> seen;
+        for (int r = cy1; r <= cy2; r++)
+            for (int c = cx1; c <= cx2; c++)
+                for (auto* v : cells[r*nx + c])
+                    if (seen.insert(v).second) out.push_back(v);
+    }
+};
+
 // --- globals ---
 
 std::vector<Vertex*> all_vertices;
@@ -163,6 +222,7 @@ std::vector<int> ring_sizes;
 std::vector<int> vert_version; // bumped when a neighbor changes, to invalidate stale PQ entries
 int next_id = 0;
 int total_verts = 0;
+Grid grid;
 std::priority_queue<Collapse, std::vector<Collapse>, CmpCollapse> pq;
 
 Vertex* new_vertex(double x, double y, int ring) {
@@ -215,6 +275,9 @@ double do_collapse(Vertex* B) {
     double cost;
     if (!find_steiner(A, B, C, D, E, cost)) return -1;
 
+    // update the grid (remove old edges, will add new ones after relinking)
+    grid.remove(A); grid.remove(B); grid.remove(C);
+
     // create new vertex and splice it in
     Vertex* ve = new_vertex(E.x, E.y, ring);
     vert_version.push_back(0);
@@ -222,6 +285,8 @@ double do_collapse(Vertex* B) {
     ve->next = D; D->prev = ve;
     B->removed = true;
     C->removed = true;
+
+    grid.add(A); grid.add(ve);
 
     if (ring_heads[ring] == B || ring_heads[ring] == C)
         ring_heads[ring] = ve;
@@ -303,11 +368,26 @@ int main(int argc, char* argv[]) {
         total_verts += ring_sizes[r];
     }
 
-    // compute input area
+    // compute input area + bounding box for the spatial grid
     double input_area = 0;
+    double lo_x = 1e18, lo_y = 1e18, hi_x = -1e18, hi_y = -1e18;
     for (int r = 0; r <= max_ring; r++) {
         if (!ring_heads[r]) continue;
         input_area += ring_area(ring_heads[r]);
+        Vertex* v = ring_heads[r];
+        do {
+            lo_x = std::min(lo_x, v->pos.x); lo_y = std::min(lo_y, v->pos.y);
+            hi_x = std::max(hi_x, v->pos.x); hi_y = std::max(hi_y, v->pos.y);
+            v = v->next;
+        } while (v != ring_heads[r]);
+    }
+
+    // set up the spatial grid and fill it with all edges
+    grid.build(lo_x, lo_y, hi_x, hi_y, total_verts);
+    for (int r = 0; r <= max_ring; r++) {
+        if (!ring_heads[r] || ring_sizes[r] < 3) continue;
+        Vertex* v = ring_heads[r];
+        do { grid.add(v); v = v->next; } while (v != ring_heads[r]);
     }
 
     // seed the priority queue with every possible initial collapse
