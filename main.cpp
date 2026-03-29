@@ -81,6 +81,63 @@ bool point_on_seg(const Point& p, const Point& s1, const Point& s2) {
     return (cx*cx + cy*cy) < 1e-6 * len_sq;
 }
 
+// --- Kronenfeld APSC: find the Steiner point E for collapsing A->B->C->D to A->E->D ---
+// returns false if degenerate
+bool find_steiner(Vertex* A, Vertex* B, Vertex* C, Vertex* D,
+                  Point& E, double& cost) {
+    double ax = A->pos.x, ay = A->pos.y;
+    double bx = B->pos.x, by = B->pos.y;
+    double cx = C->pos.x, cy = C->pos.y;
+    double dx = D->pos.x, dy = D->pos.y;
+
+    // constraint line E* (parallel to AD) from Kronenfeld eq. 1b
+    double a_coef = dy - ay;
+    double b_coef = ax - dx;
+    double c_coef = -by*ax + (ay - cy)*bx + (by - dy)*cx + cy*dx;
+
+    if (std::fabs(a_coef) < 1e-15 && std::fabs(b_coef) < 1e-15) return false;
+
+    // get two points on E* so we can intersect it with AB or CD
+    Point ep1, ep2;
+    if (std::fabs(a_coef) >= std::fabs(b_coef))
+        ep1 = Point(-c_coef / a_coef, 0);
+    else
+        ep1 = Point(0, -c_coef / b_coef);
+    ep2 = Point(ep1.x + (dx - ax), ep1.y + (dy - ay));
+
+    Point e_from_ab, e_from_cd;
+    bool got_ab = line_intersect(ep1, ep2, A->pos, B->pos, e_from_ab);
+    bool got_cd = line_intersect(ep1, ep2, C->pos, D->pos, e_from_cd);
+
+    // Kronenfeld Fig. 4: choose which line to place E on
+    double dist_b = cross2d(dx-ax, dy-ay, bx-ax, by-ay);
+    double dist_c = cross2d(dx-ax, dy-ay, cx-ax, cy-ay);
+    double d_ad = dx*ay - ax*dy;
+    double estar_side = c_coef - d_ad;
+
+    bool use_ab;
+    if ((dist_b > 0) != (dist_c > 0)) {
+        use_ab = ((dist_b > 0) == (estar_side > 0));
+    } else {
+        use_ab = (std::fabs(dist_b) <= std::fabs(dist_c));
+    }
+
+    bool ok;
+    if (use_ab) {
+        ok = got_ab; E = e_from_ab;
+        if (!ok) { ok = got_cd; E = e_from_cd; }
+    } else {
+        ok = got_cd; E = e_from_cd;
+        if (!ok) { ok = got_ab; E = e_from_ab; }
+    }
+    if (!ok) return false;
+
+    cost = triangle_area(A->pos, B->pos, E)
+         + triangle_area(B->pos, C->pos, E)
+         + triangle_area(C->pos, D->pos, E);
+    return true;
+}
+
 // --- globals ---
 
 std::vector<Vertex*> all_vertices;
