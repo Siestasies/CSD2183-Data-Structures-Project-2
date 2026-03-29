@@ -223,6 +223,44 @@ std::vector<int> vert_version; // bumped when a neighbor changes, to invalidate 
 int next_id = 0;
 int total_verts = 0;
 Grid grid;
+
+// --- topology check: would this collapse create any intersections? ---
+
+bool collapse_invalid(Vertex* A, Vertex* B, Vertex* C, Vertex* D, const Point& E) {
+    // vertices whose adjacent edges we don't need to test (they're being removed or shared)
+    std::unordered_set<Vertex*> skip = {A, B, C, D};
+    if (A->prev) skip.insert(A->prev);
+
+    // bounding box of the two new edges A->E and E->D
+    double lo_x = std::min({A->pos.x, E.x, D->pos.x});
+    double lo_y = std::min({A->pos.y, E.y, D->pos.y});
+    double hi_x = std::max({A->pos.x, E.x, D->pos.x});
+    double hi_y = std::max({A->pos.y, E.y, D->pos.y});
+
+    std::vector<Vertex*> nearby;
+    grid.query(lo_x, lo_y, hi_x, hi_y, nearby);
+
+    for (auto* v : nearby) {
+        if (v->removed || v->next->removed) continue;
+        if (skip.count(v) || skip.count(v->next)) continue;
+
+        // do the new edges cross this existing edge?
+        if (edges_cross(A->pos, E, v->pos, v->next->pos)) return true;
+        if (edges_cross(E, D->pos, v->pos, v->next->pos)) return true;
+    }
+
+    // also make sure no nearby vertex lands exactly on a new edge (would mean rings touching)
+    for (auto* v : nearby) {
+        if (v->removed) continue;
+        for (Vertex* cand : {v, v->next}) {
+            if (skip.count(cand) || cand->removed) continue;
+            if (point_on_seg(cand->pos, A->pos, E) ||
+                point_on_seg(cand->pos, E, D->pos))
+                return true;
+        }
+    }
+    return false;
+}
 std::priority_queue<Collapse, std::vector<Collapse>, CmpCollapse> pq;
 
 Vertex* new_vertex(double x, double y, int ring) {
@@ -274,6 +312,8 @@ double do_collapse(Vertex* B) {
     Point E;
     double cost;
     if (!find_steiner(A, B, C, D, E, cost)) return -1;
+
+    if (collapse_invalid(A, B, C, D, E)) return -1;
 
     // update the grid (remove old edges, will add new ones after relinking)
     grid.remove(A); grid.remove(B); grid.remove(C);
