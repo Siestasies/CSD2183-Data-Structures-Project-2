@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <queue>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -22,6 +23,22 @@ struct Vertex {
     int ring_id = -1;
     int id = -1;
     bool removed = false;
+};
+
+// represents one possible segment collapse (A->B->C->D becomes A->E->D)
+// we store B because that's the first of the two vertices being replaced
+struct Collapse {
+    Vertex* b_vert = nullptr;
+    double cost = 0.0;       // areal displacement
+    int version = 0;         // for detecting stale PQ entries
+};
+
+// min heap by cost, break ties by vertex id
+struct CmpCollapse {
+    bool operator()(const Collapse& a, const Collapse& b) const {
+        if (a.cost != b.cost) return a.cost > b.cost;
+        return a.b_vert->id > b.b_vert->id;
+    }
 };
 
 // --- geometry helpers ---
@@ -143,8 +160,10 @@ bool find_steiner(Vertex* A, Vertex* B, Vertex* C, Vertex* D,
 std::vector<Vertex*> all_vertices;
 std::vector<Vertex*> ring_heads;
 std::vector<int> ring_sizes;
+std::vector<int> vert_version; // bumped when a neighbor changes, to invalidate stale PQ entries
 int next_id = 0;
 int total_verts = 0;
+std::priority_queue<Collapse, std::vector<Collapse>, CmpCollapse> pq;
 
 Vertex* new_vertex(double x, double y, int ring) {
     Vertex* v = new Vertex();
@@ -152,6 +171,7 @@ Vertex* new_vertex(double x, double y, int ring) {
     v->ring_id = ring;
     v->id = next_id++;
     all_vertices.push_back(v);
+    vert_version.push_back(0);
     return v;
 }
 
@@ -168,6 +188,63 @@ Vertex* build_ring(const std::vector<Point>& pts, int ring) {
     prev->next = head;
     head->prev = prev;
     return head;
+}
+
+// --- priority queue management ---
+
+void push_collapse(Vertex* B) {
+    if (B->removed) return;
+    if (ring_sizes[B->ring_id] <= 3) return;
+
+    Point E;
+    double cost;
+    if (!find_steiner(B->prev, B, B->next, B->next->next, E, cost)) return;
+
+    pq.push({B, cost, vert_version[B->id]});
+}
+
+// try to collapse B. returns actual displacement if successful, -1 if blocked
+double do_collapse(Vertex* B) {
+    Vertex* A = B->prev;
+    Vertex* C = B->next;
+    Vertex* D = C->next;
+    int ring = B->ring_id;
+    if (ring_sizes[ring] <= 3) return -1;
+
+    Point E;
+    double cost;
+    if (!find_steiner(A, B, C, D, E, cost)) return -1;
+
+    // create new vertex and splice it in
+    Vertex* ve = new_vertex(E.x, E.y, ring);
+    vert_version.push_back(0);
+    A->next = ve; ve->prev = A;
+    ve->next = D; D->prev = ve;
+    B->removed = true;
+    C->removed = true;
+
+    if (ring_heads[ring] == B || ring_heads[ring] == C)
+        ring_heads[ring] = ve;
+
+    ring_sizes[ring]--;
+    total_verts--;
+
+    // bump versions so stale PQ entries get skipped
+    vert_version[A->id]++;
+    vert_version[ve->id] = 0;
+    vert_version[D->id]++;
+    if (A->prev) vert_version[A->prev->id]++;
+    if (D->next) vert_version[D->next->id]++;
+
+    // enqueue new candidates for all affected vertices
+    if (ring_sizes[ring] > 3) {
+        push_collapse(A->prev);
+        push_collapse(A);
+        push_collapse(ve);
+        push_collapse(D);
+        push_collapse(D->next);
+    }
+    return cost;
 }
 
 // --- CSV parsing ---
@@ -233,11 +310,30 @@ int main(int argc, char* argv[]) {
         input_area += ring_area(ring_heads[r]);
     }
 
-    std::cout << "Total vertices: " << total_verts << std::endl;
-    std::cout << "Target: " << target << std::endl;
-    std::cout << "Input area: " << std::scientific << std::setprecision(6) << input_area << std::endl;
+    // seed the priority queue with every possible initial collapse
+    for (int r = 0; r <= max_ring; r++) {
+        if (!ring_heads[r] || ring_sizes[r] <= 3) continue;
+        Vertex* v = ring_heads[r];
+        do { push_collapse(v); v = v->next; } while (v != ring_heads[r]);
+    }
 
-    // print output
+    // greedy collapse loop
+    double total_disp = 0;
+    while (total_verts > target && !pq.empty()) {
+        auto top = pq.top(); pq.pop();
+        if (top.b_vert->removed) continue;
+        if (top.version != vert_version[top.b_vert->id]) continue;
+        if (ring_sizes[top.b_vert->ring_id] <= 3) continue;
+        double d = do_collapse(top.b_vert);
+        if (d >= 0) total_disp += d;
+    }
+
+    // compute output area
+    double output_area = 0;
+    for (int r = 0; r <= max_ring; r++)
+        if (ring_heads[r]) output_area += ring_area(ring_heads[r]);
+
+    // print simplified polygon
     std::cout << "ring_id,vertex_id,x,y" << std::endl;
     for (int r = 0; r <= max_ring; r++) {
         if (!ring_heads[r]) continue;
@@ -251,6 +347,13 @@ int main(int argc, char* argv[]) {
             v = v->next;
         } while (v != ring_heads[r]);
     }
+
+    std::cout << "Total signed area in input: "
+              << std::scientific << std::setprecision(6) << input_area << std::endl;
+    std::cout << "Total signed area in output: "
+              << std::scientific << std::setprecision(6) << output_area << std::endl;
+    std::cout << "Total areal displacement: "
+              << std::scientific << std::setprecision(6) << total_disp << std::endl;
 
     for (auto* v : all_vertices) delete v;
     return 0;
