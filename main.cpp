@@ -156,6 +156,139 @@ bool find_steiner(Vertex* A, Vertex* B, Vertex* C, Vertex* D,
     return true;
 }
 
+// --- simple grid spatial index so intersection checks aren't O(n) ---
+
+struct Grid {
+    double ox, oy, cw, ch;
+    int nx, ny;
+    std::vector<std::vector<Vertex*>> cells;
+
+    void build(double x1, double y1, double x2, double y2, int n_verts) {
+        ox = x1 - 1; oy = y1 - 1;
+        int side = std::max(1, (int)std::sqrt((double)n_verts));
+        nx = ny = side;
+        cw = (x2 - x1 + 2) / nx;
+        ch = (y2 - y1 + 2) / ny;
+        cells.resize(nx * ny);
+    }
+
+    // get the range of grid cells that a bounding box overlaps
+    void bbox_cells(double x1, double y1, double x2, double y2,
+                    int& cx1, int& cy1, int& cx2, int& cy2) const {
+        cx1 = std::max(0,    (int)((std::min(x1,x2) - ox) / cw));
+        cy1 = std::max(0,    (int)((std::min(y1,y2) - oy) / ch));
+        cx2 = std::min(nx-1, (int)((std::max(x1,x2) - ox) / cw));
+        cy2 = std::min(ny-1, (int)((std::max(y1,y2) - oy) / ch));
+    }
+
+    void add(Vertex* v) {
+        int cx1, cy1, cx2, cy2;
+        bbox_cells(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y,
+                   cx1, cy1, cx2, cy2);
+        for (int r = cy1; r <= cy2; r++)
+            for (int c = cx1; c <= cx2; c++)
+                cells[r*nx + c].push_back(v);
+    }
+
+    void remove(Vertex* v) {
+        int cx1, cy1, cx2, cy2;
+        bbox_cells(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y,
+                   cx1, cy1, cx2, cy2);
+        for (int r = cy1; r <= cy2; r++)
+            for (int c = cx1; c <= cx2; c++) {
+                auto& cell = cells[r*nx + c];
+                cell.erase(std::remove(cell.begin(), cell.end(), v), cell.end());
+            }
+    }
+
+    // find all edge-start vertices near a bounding box (deduped)
+    void query(double x1, double y1, double x2, double y2,
+               std::vector<Vertex*>& out) const {
+        int cx1, cy1, cx2, cy2;
+        bbox_cells(x1, y1, x2, y2, cx1, cy1, cx2, cy2);
+        std::unordered_set<Vertex*> seen;
+        for (int r = cy1; r <= cy2; r++)
+            for (int c = cx1; c <= cx2; c++)
+                for (auto* v : cells[r*nx + c])
+                    if (seen.insert(v).second) out.push_back(v);
+    }
+};
+
+// --- globals ---
+
+std::vector<Vertex*> all_vertices;
+std::vector<Vertex*> ring_heads;
+std::vector<int> ring_sizes;
+std::vector<int> vert_version; // bumped when a neighbor changes, to invalidate stale PQ entries
+int next_id = 0;
+int total_verts = 0;
+Grid grid;
+std::priority_queue<Collapse, std::vector<Collapse>, CmpCollapse> pq;
+
+Vertex* new_vertex(double x, double y, int ring) {
+    Vertex* v = new Vertex();
+    v->pos = Point(x, y);
+    v->ring_id = ring;
+    v->id = next_id++;
+    all_vertices.push_back(v);
+    vert_version.push_back(0);
+    return v;
+}
+
+Vertex* build_ring(const std::vector<Point>& pts, int ring) {
+    if (pts.empty()) return nullptr;
+    Vertex* head = new_vertex(pts[0].x, pts[0].y, ring);
+    Vertex* prev = head;
+    for (size_t i = 1; i < pts.size(); i++) {
+        Vertex* v = new_vertex(pts[i].x, pts[i].y, ring);
+        prev->next = v;
+        v->prev = prev;
+        prev = v;
+    }
+    prev->next = head;
+    head->prev = prev;
+    return head;
+}
+
+// --- topology check: would this collapse create any intersections? ---
+
+bool collapse_invalid(Vertex* A, Vertex* B, Vertex* C, Vertex* D, const Point& E) {
+    // vertices whose adjacent edges we don't need to test (they're being removed or shared)
+    // vertices whose adjacent edges we don't need to test (they're being removed or shared)
+    std::unordered_set<Vertex*> skip = {A, B, C, D};
+    if (A->prev) skip.insert(A->prev);
+
+    // bounding box of the two new edges A->E and E->D
+    double lo_x = std::min({A->pos.x, E.x, D->pos.x});
+    double lo_y = std::min({A->pos.y, E.y, D->pos.y});
+    double hi_x = std::max({A->pos.x, E.x, D->pos.x});
+    double hi_y = std::max({A->pos.y, E.y, D->pos.y});
+
+    std::vector<Vertex*> nearby;
+    grid.query(lo_x, lo_y, hi_x, hi_y, nearby);
+
+    for (auto* v : nearby) {
+        if (v->removed || v->next->removed) continue;
+        if (skip.count(v) || skip.count(v->next)) continue;
+
+        // do the new edges cross this existing edge?
+        if (edges_cross(A->pos, E, v->pos, v->next->pos)) return true;
+        if (edges_cross(E, D->pos, v->pos, v->next->pos)) return true;
+    }
+
+    // also make sure no nearby vertex lands exactly on a new edge (would mean rings touching)
+    for (auto* v : nearby) {
+        if (v->removed) continue;
+        for (Vertex* cand : {v, v->next}) {
+            if (skip.count(cand) || cand->removed) continue;
+            if (point_on_seg(cand->pos, A->pos, E) ||
+                point_on_seg(cand->pos, E, D->pos))
+                return true;
+        }
+    }
+    return false;
+}
+
 // --- compute the actual symmetric-difference displacement (for output reporting) ---
 // the new path A->E->D might cross the old path A->B->C->D, so we split at
 // crossing points and sum up the absolute area of each piece
@@ -257,138 +390,6 @@ double compute_real_displacement(const Point& A, const Point& B, const Point& C,
     return total;
 }
 
-// --- simple grid spatial index so intersection checks aren't O(n) ---
-
-struct Grid {
-    double ox, oy, cw, ch;
-    int nx, ny;
-    std::vector<std::vector<Vertex*>> cells;
-
-    void build(double x1, double y1, double x2, double y2, int n_verts) {
-        ox = x1 - 1; oy = y1 - 1;
-        int side = std::max(1, (int)std::sqrt((double)n_verts));
-        nx = ny = side;
-        cw = (x2 - x1 + 2) / nx;
-        ch = (y2 - y1 + 2) / ny;
-        cells.resize(nx * ny);
-    }
-
-    // get the range of grid cells that a bounding box overlaps
-    void bbox_cells(double x1, double y1, double x2, double y2,
-                    int& cx1, int& cy1, int& cx2, int& cy2) const {
-        cx1 = std::max(0,    (int)((std::min(x1,x2) - ox) / cw));
-        cy1 = std::max(0,    (int)((std::min(y1,y2) - oy) / ch));
-        cx2 = std::min(nx-1, (int)((std::max(x1,x2) - ox) / cw));
-        cy2 = std::min(ny-1, (int)((std::max(y1,y2) - oy) / ch));
-    }
-
-    void add(Vertex* v) {
-        int cx1, cy1, cx2, cy2;
-        bbox_cells(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y,
-                   cx1, cy1, cx2, cy2);
-        for (int r = cy1; r <= cy2; r++)
-            for (int c = cx1; c <= cx2; c++)
-                cells[r*nx + c].push_back(v);
-    }
-
-    void remove(Vertex* v) {
-        int cx1, cy1, cx2, cy2;
-        bbox_cells(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y,
-                   cx1, cy1, cx2, cy2);
-        for (int r = cy1; r <= cy2; r++)
-            for (int c = cx1; c <= cx2; c++) {
-                auto& cell = cells[r*nx + c];
-                cell.erase(std::remove(cell.begin(), cell.end(), v), cell.end());
-            }
-    }
-
-    // find all edge-start vertices near a bounding box (deduped)
-    void query(double x1, double y1, double x2, double y2,
-               std::vector<Vertex*>& out) const {
-        int cx1, cy1, cx2, cy2;
-        bbox_cells(x1, y1, x2, y2, cx1, cy1, cx2, cy2);
-        std::unordered_set<Vertex*> seen;
-        for (int r = cy1; r <= cy2; r++)
-            for (int c = cx1; c <= cx2; c++)
-                for (auto* v : cells[r*nx + c])
-                    if (seen.insert(v).second) out.push_back(v);
-    }
-};
-
-// --- globals ---
-
-std::vector<Vertex*> all_vertices;
-std::vector<Vertex*> ring_heads;
-std::vector<int> ring_sizes;
-std::vector<int> vert_version; // bumped when a neighbor changes, to invalidate stale PQ entries
-int next_id = 0;
-int total_verts = 0;
-Grid grid;
-
-// --- topology check: would this collapse create any intersections? ---
-
-bool collapse_invalid(Vertex* A, Vertex* B, Vertex* C, Vertex* D, const Point& E) {
-    // vertices whose adjacent edges we don't need to test (they're being removed or shared)
-    std::unordered_set<Vertex*> skip = {A, B, C, D};
-    if (A->prev) skip.insert(A->prev);
-
-    // bounding box of the two new edges A->E and E->D
-    double lo_x = std::min({A->pos.x, E.x, D->pos.x});
-    double lo_y = std::min({A->pos.y, E.y, D->pos.y});
-    double hi_x = std::max({A->pos.x, E.x, D->pos.x});
-    double hi_y = std::max({A->pos.y, E.y, D->pos.y});
-
-    std::vector<Vertex*> nearby;
-    grid.query(lo_x, lo_y, hi_x, hi_y, nearby);
-
-    for (auto* v : nearby) {
-        if (v->removed || v->next->removed) continue;
-        if (skip.count(v) || skip.count(v->next)) continue;
-
-        // do the new edges cross this existing edge?
-        if (edges_cross(A->pos, E, v->pos, v->next->pos)) return true;
-        if (edges_cross(E, D->pos, v->pos, v->next->pos)) return true;
-    }
-
-    // also make sure no nearby vertex lands exactly on a new edge (would mean rings touching)
-    for (auto* v : nearby) {
-        if (v->removed) continue;
-        for (Vertex* cand : {v, v->next}) {
-            if (skip.count(cand) || cand->removed) continue;
-            if (point_on_seg(cand->pos, A->pos, E) ||
-                point_on_seg(cand->pos, E, D->pos))
-                return true;
-        }
-    }
-    return false;
-}
-std::priority_queue<Collapse, std::vector<Collapse>, CmpCollapse> pq;
-
-Vertex* new_vertex(double x, double y, int ring) {
-    Vertex* v = new Vertex();
-    v->pos = Point(x, y);
-    v->ring_id = ring;
-    v->id = next_id++;
-    all_vertices.push_back(v);
-    vert_version.push_back(0);
-    return v;
-}
-
-Vertex* build_ring(const std::vector<Point>& pts, int ring) {
-    if (pts.empty()) return nullptr;
-    Vertex* head = new_vertex(pts[0].x, pts[0].y, ring);
-    Vertex* prev = head;
-    for (size_t i = 1; i < pts.size(); i++) {
-        Vertex* v = new_vertex(pts[i].x, pts[i].y, ring);
-        prev->next = v;
-        v->prev = prev;
-        prev = v;
-    }
-    prev->next = head;
-    head->prev = prev;
-    return head;
-}
-
 // --- priority queue management ---
 
 void push_collapse(Vertex* B) {
@@ -456,6 +457,72 @@ double do_collapse(Vertex* B) {
         push_collapse(D->next);
     }
     return real_disp;
+}
+
+// --- look-ahead: evaluate how a collapse affects its neighborhood ---
+// temporarily splice a Steiner point into the ring, compute the resulting
+// neighbor collapse costs, then revert. returns own displacement + weighted
+// average of neighbor costs, or 1e30 if invalid.
+
+double lookahead_score(Vertex* B) {
+    Vertex* A = B->prev;
+    Vertex* C = B->next;
+    Vertex* D = C->next;
+    int ring = B->ring_id;
+    if (ring_sizes[ring] <= 3) return 1e30;
+
+    Point E;
+    double cost;
+    if (!find_steiner(A, B, C, D, E, cost)) return 1e30;
+    // skip topology check in look-ahead (expensive grid query, and
+    // do_collapse will check before committing anyway)
+
+    // own actual displacement
+    double own_disp = compute_real_displacement(A->pos, B->pos, C->pos, D->pos, E);
+
+    // temporarily splice in E to evaluate neighbor collapse costs
+    Vertex temp_e;
+    temp_e.pos = E;
+    temp_e.ring_id = ring;
+    temp_e.id = -1;
+    temp_e.removed = false;
+    temp_e.prev = A;
+    temp_e.next = D;
+
+    Vertex* old_a_next = A->next;
+    Vertex* old_d_prev = D->prev;
+    A->next = &temp_e;
+    D->prev = &temp_e;
+
+    int new_ring_size = ring_sizes[ring] - 1;
+    double neighbor_sum = 0;
+    int neighbor_count = 0;
+
+    if (new_ring_size > 3) {
+        Point ne; double nc;
+        // five affected neighbor collapse sequences
+        if (A->prev && A->prev->prev &&
+            find_steiner(A->prev->prev, A->prev, A, &temp_e, ne, nc))
+            { neighbor_sum += nc; neighbor_count++; }
+        if (A->prev &&
+            find_steiner(A->prev, A, &temp_e, D, ne, nc))
+            { neighbor_sum += nc; neighbor_count++; }
+        if (D->next &&
+            find_steiner(A, &temp_e, D, D->next, ne, nc))
+            { neighbor_sum += nc; neighbor_count++; }
+        if (D->next && D->next->next &&
+            find_steiner(&temp_e, D, D->next, D->next->next, ne, nc))
+            { neighbor_sum += nc; neighbor_count++; }
+        if (D->next && D->next->next && D->next->next->next &&
+            find_steiner(D, D->next, D->next->next, D->next->next->next, ne, nc))
+            { neighbor_sum += nc; neighbor_count++; }
+    }
+
+    A->next = old_a_next;
+    D->prev = old_d_prev;
+
+    double avg_neighbor = (neighbor_count > 0) ? (neighbor_sum / neighbor_count) : 0;
+    return own_disp + 0.15 * avg_neighbor;
 }
 
 // --- CSV parsing ---
@@ -543,15 +610,61 @@ int main(int argc, char* argv[]) {
         do { push_collapse(v); v = v->next; } while (v != ring_heads[r]);
     }
 
-    // greedy collapse loop
+    // collapse with depth-1 look-ahead over top-k candidates
+    // look-ahead is applied when remaining vertices are manageable;
+    // for very large inputs early on, use plain greedy to stay fast
+    const int LOOKAHEAD_K = 5;
+    const int LOOKAHEAD_THRESHOLD = 200; // look-ahead for small polygon-with-holes inputs
     double total_disp = 0;
     while (total_verts > target && !pq.empty()) {
-        auto top = pq.top(); pq.pop();
-        if (top.b_vert->removed) continue;
-        if (top.version != vert_version[top.b_vert->id]) continue;
-        if (ring_sizes[top.b_vert->ring_id] <= 3) continue;
-        double d = do_collapse(top.b_vert);
-        if (d >= 0) total_disp += d;
+        bool use_lookahead = (total_verts <= LOOKAHEAD_THRESHOLD);
+
+        if (!use_lookahead) {
+            // plain greedy: just take the cheapest valid candidate
+            auto top = pq.top(); pq.pop();
+            if (top.b_vert->removed) continue;
+            if (top.version != vert_version[top.b_vert->id]) continue;
+            if (ring_sizes[top.b_vert->ring_id] <= 3) continue;
+            double d = do_collapse(top.b_vert);
+            if (d >= 0) total_disp += d;
+        } else {
+            // look-ahead: collect top-k, evaluate neighborhood, pick best
+            std::vector<Collapse> candidates;
+            candidates.reserve(LOOKAHEAD_K);
+            while ((int)candidates.size() < LOOKAHEAD_K && !pq.empty()) {
+                auto top = pq.top(); pq.pop();
+                if (top.b_vert->removed) continue;
+                if (top.version != vert_version[top.b_vert->id]) continue;
+                if (ring_sizes[top.b_vert->ring_id] <= 3) continue;
+                candidates.push_back(top);
+            }
+            if (candidates.empty()) break;
+
+            // among similar-cost candidates, use look-ahead to pick best
+            int best_idx = 0;
+            if (candidates.size() > 1) {
+                double cheapest = candidates[0].cost;
+                double threshold = cheapest * 1.5 + 1e-12;
+                if (candidates[1].cost <= threshold) {
+                    double best_score = lookahead_score(candidates[0].b_vert);
+                    for (int i = 1; i < (int)candidates.size(); i++) {
+                        if (candidates[i].cost > threshold) break;
+                        double score = lookahead_score(candidates[i].b_vert);
+                        if (score < best_score) {
+                            best_score = score;
+                            best_idx = i;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < (int)candidates.size(); i++) {
+                if (i != best_idx) pq.push(candidates[i]);
+            }
+
+            double d = do_collapse(candidates[best_idx].b_vert);
+            if (d >= 0) total_disp += d;
+        }
     }
 
     // compute output area
