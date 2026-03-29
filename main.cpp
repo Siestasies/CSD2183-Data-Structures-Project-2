@@ -156,6 +156,107 @@ bool find_steiner(Vertex* A, Vertex* B, Vertex* C, Vertex* D,
     return true;
 }
 
+// --- compute the actual symmetric-difference displacement (for output reporting) ---
+// the new path A->E->D might cross the old path A->B->C->D, so we split at
+// crossing points and sum up the absolute area of each piece
+
+double compute_real_displacement(const Point& A, const Point& B, const Point& C,
+                                 const Point& D, const Point& E) {
+    Point new_pts[3] = {A, E, D};
+    Point old_pts[4] = {A, B, C, D};
+
+    // find where new edges cross old edges
+    struct Crossing { Point pt; int ni, oi; double nt, ot; };
+    std::vector<Crossing> crossings;
+
+    for (int ni = 0; ni < 2; ni++) {
+        for (int oi = 0; oi < 3; oi++) {
+            double dx1 = new_pts[ni+1].x - new_pts[ni].x;
+            double dy1 = new_pts[ni+1].y - new_pts[ni].y;
+            double dx2 = old_pts[oi+1].x - old_pts[oi].x;
+            double dy2 = old_pts[oi+1].y - old_pts[oi].y;
+            double det = dx1*dy2 - dy1*dx2;
+            if (std::fabs(det) < 1e-15) continue;
+            double dx3 = old_pts[oi].x - new_pts[ni].x;
+            double dy3 = old_pts[oi].y - new_pts[ni].y;
+            double t = (dx3*dy2 - dy3*dx2) / det;
+            double u = (dx3*dy1 - dy3*dx1) / det;
+            if (t > 1e-9 && t < 1-1e-9 && u > 1e-9 && u < 1-1e-9) {
+                Crossing cr;
+                cr.pt = Point(new_pts[ni].x + t*dx1, new_pts[ni].y + t*dy1);
+                cr.ni = ni; cr.oi = oi; cr.nt = t; cr.ot = u;
+                crossings.push_back(cr);
+            }
+        }
+    }
+
+    // no crossings: displacement is just the area of polygon ABCDE
+    if (crossings.empty()) {
+        Point poly[5] = {A, B, C, D, E};
+        double area = 0;
+        for (int i = 0; i < 5; i++) {
+            int j = (i+1) % 5;
+            area += cross2d(poly[i].x, poly[i].y, poly[j].x, poly[j].y);
+        }
+        return std::fabs(area * 0.5);
+    }
+
+    // with crossings: build both paths with crossing points inserted, then
+    // walk matching segments and sum absolute areas of each sub-polygon
+    auto build_path = [&](Point* seg, int n_seg, bool use_ni) {
+        std::vector<Point> path;
+        for (int i = 0; i < n_seg; i++) {
+            path.push_back(seg[i]);
+            std::vector<std::pair<double, Point>> here;
+            for (auto& cr : crossings)
+                if ((use_ni ? cr.ni : cr.oi) == i)
+                    here.push_back({use_ni ? cr.nt : cr.ot, cr.pt});
+            std::sort(here.begin(), here.end(),
+                      [](auto& a, auto& b){ return a.first < b.first; });
+            for (auto& [t, pt] : here) path.push_back(pt);
+        }
+        path.push_back(seg[n_seg]);
+        return path;
+    };
+
+    auto old_path = build_path(old_pts, 3, false);
+    auto new_path = build_path(new_pts, 2, true);
+
+    // find indices of crossing points in each path
+    auto find_splits = [&](const std::vector<Point>& path) {
+        std::vector<int> splits = {0};
+        for (int i = 1; i < (int)path.size()-1; i++)
+            for (auto& cr : crossings) {
+                double dx = path[i].x - cr.pt.x, dy = path[i].y - cr.pt.y;
+                if (dx*dx + dy*dy < 1e-18) { splits.push_back(i); break; }
+            }
+        splits.push_back((int)path.size()-1);
+        return splits;
+    };
+
+    auto old_sp = find_splits(old_path);
+    auto new_sp = find_splits(new_path);
+
+    // if something went wrong matching, just fall back to triangle fan
+    if (old_sp.size() != new_sp.size())
+        return triangle_area(A,B,E) + triangle_area(B,C,E) + triangle_area(C,D,E);
+
+    double total = 0;
+    for (int s = 0; s < (int)old_sp.size()-1; s++) {
+        std::vector<Point> poly;
+        for (int i = old_sp[s]; i <= old_sp[s+1]; i++) poly.push_back(old_path[i]);
+        for (int i = new_sp[s+1]-1; i > new_sp[s]; i--) poly.push_back(new_path[i]);
+        if (poly.size() < 3) continue;
+        double area = 0;
+        for (int i = 0; i < (int)poly.size(); i++) {
+            int j = (i+1) % (int)poly.size();
+            area += cross2d(poly[i].x, poly[i].y, poly[j].x, poly[j].y);
+        }
+        total += std::fabs(area * 0.5);
+    }
+    return total;
+}
+
 // --- simple grid spatial index so intersection checks aren't O(n) ---
 
 struct Grid {
@@ -298,7 +399,11 @@ void push_collapse(Vertex* B) {
     double cost;
     if (!find_steiner(B->prev, B, B->next, B->next->next, E, cost)) return;
 
-    pq.push({B, cost, vert_version[B->id]});
+    // use exact symmetric-difference displacement for more accurate PQ ordering
+    // (triangle-fan cost overcounts when new/old paths cross, distorting greedy order)
+    double real_cost = compute_real_displacement(
+        B->prev->pos, B->pos, B->next->pos, B->next->next->pos, E);
+    pq.push({B, real_cost, vert_version[B->id]});
 }
 
 // try to collapse B. returns actual displacement if successful, -1 if blocked
@@ -312,8 +417,9 @@ double do_collapse(Vertex* B) {
     Point E;
     double cost;
     if (!find_steiner(A, B, C, D, E, cost)) return -1;
-
     if (collapse_invalid(A, B, C, D, E)) return -1;
+
+    double real_disp = compute_real_displacement(A->pos, B->pos, C->pos, D->pos, E);
 
     // update the grid (remove old edges, will add new ones after relinking)
     grid.remove(A); grid.remove(B); grid.remove(C);
@@ -349,7 +455,7 @@ double do_collapse(Vertex* B) {
         push_collapse(D);
         push_collapse(D->next);
     }
-    return cost;
+    return real_disp;
 }
 
 // --- CSV parsing ---
