@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
@@ -22,6 +23,63 @@ struct Vertex {
     int id = -1;
     bool removed = false;
 };
+
+// --- geometry helpers ---
+
+double cross2d(double ax, double ay, double bx, double by) {
+    return ax * by - ay * bx;
+}
+
+double triangle_area(const Point& a, const Point& b, const Point& c) {
+    return 0.5 * std::fabs(cross2d(b.x - a.x, b.y - a.y, c.x - a.x, c.y - a.y));
+}
+
+// shoelace formula on a circular linked list
+double ring_area(Vertex* start) {
+    double sum = 0.0;
+    Vertex* v = start;
+    do {
+        sum += cross2d(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y);
+        v = v->next;
+    } while (v != start);
+    return sum * 0.5;
+}
+
+// strict proper intersection (no touching/collinear)
+bool edges_cross(const Point& a, const Point& b, const Point& c, const Point& d) {
+    double d1 = cross2d(d.x-c.x, d.y-c.y, a.x-c.x, a.y-c.y);
+    double d2 = cross2d(d.x-c.x, d.y-c.y, b.x-c.x, b.y-c.y);
+    double d3 = cross2d(b.x-a.x, b.y-a.y, c.x-a.x, c.y-a.y);
+    double d4 = cross2d(b.x-a.x, b.y-a.y, d.x-a.x, d.y-a.y);
+    return ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
+           ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0));
+}
+
+// find where two infinite lines intersect (false if parallel)
+bool line_intersect(const Point& p1, const Point& p2,
+                    const Point& p3, const Point& p4, Point& out) {
+    double a1 = p2.y - p1.y, b1 = p1.x - p2.x;
+    double c1 = a1 * p1.x + b1 * p1.y;
+    double a2 = p4.y - p3.y, b2 = p3.x - p4.x;
+    double c2 = a2 * p3.x + b2 * p3.y;
+    double det = a1 * b2 - a2 * b1;
+    if (std::fabs(det) < 1e-15) return false;
+    out.x = (c1 * b2 - c2 * b1) / det;
+    out.y = (a1 * c2 - a2 * c1) / det;
+    return true;
+}
+
+// checks if point P is (nearly) on segment S1-S2
+bool point_on_seg(const Point& p, const Point& s1, const Point& s2) {
+    double dx = s2.x - s1.x, dy = s2.y - s1.y;
+    double len_sq = dx*dx + dy*dy;
+    if (len_sq < 1e-30) return false;
+    double t = ((p.x - s1.x)*dx + (p.y - s1.y)*dy) / len_sq;
+    if (t < -1e-9 || t > 1.0 + 1e-9) return false;
+    double cx = s1.x + t*dx - p.x;
+    double cy = s1.y + t*dy - p.y;
+    return (cx*cx + cy*cy) < 1e-6 * len_sq;
+}
 
 // --- globals ---
 
@@ -53,21 +111,6 @@ Vertex* build_ring(const std::vector<Point>& pts, int ring) {
     prev->next = head;
     head->prev = prev;
     return head;
-}
-
-// shoelace formula on a circular linked list
-double cross2d(double ax, double ay, double bx, double by) {
-    return ax * by - ay * bx;
-}
-
-double ring_area(Vertex* start) {
-    double sum = 0.0;
-    Vertex* v = start;
-    do {
-        sum += cross2d(v->pos.x, v->pos.y, v->next->pos.x, v->next->pos.y);
-        v = v->next;
-    } while (v != start);
-    return sum * 0.5;
 }
 
 // --- CSV parsing ---
