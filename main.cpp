@@ -24,6 +24,7 @@ struct Vertex {
     Vertex* next = nullptr;
     int ring_id = -1;
     int id = -1;
+    int last_query = 0;   // epoch counter for grid query dedup
     bool removed = false;
 };
 
@@ -166,7 +167,7 @@ struct Grid {
 
     void build(double x1, double y1, double x2, double y2, int n_verts) {
         ox = x1 - 1; oy = y1 - 1;
-        int side = std::max(1, (int)std::sqrt((double)n_verts));
+        int side = std::max(1, std::min(256, (int)std::sqrt((double)n_verts)));
         nx = ny = side;
         cw = (x2 - x1 + 2) / nx;
         ch = (y2 - y1 + 2) / ny;
@@ -202,16 +203,22 @@ struct Grid {
             }
     }
 
+    // monotonic counter for dedup without hashing
+    mutable int query_epoch = 0;
+
     // find all edge-start vertices near a bounding box (deduped)
     void query(double x1, double y1, double x2, double y2,
-               std::vector<Vertex*>& out) const {
+               std::vector<Vertex*>& out) {
         int cx1, cy1, cx2, cy2;
         bbox_cells(x1, y1, x2, y2, cx1, cy1, cx2, cy2);
-        std::unordered_set<Vertex*> seen;
+        query_epoch++;
         for (int r = cy1; r <= cy2; r++)
             for (int c = cx1; c <= cx2; c++)
                 for (auto* v : cells[r*nx + c])
-                    if (seen.insert(v).second) out.push_back(v);
+                    if (v->last_query != query_epoch) {
+                        v->last_query = query_epoch;
+                        out.push_back(v);
+                    }
     }
 };
 
@@ -254,10 +261,13 @@ Vertex* build_ring(const std::vector<Point>& pts, int ring) {
 // --- topology check: would this collapse create any intersections? ---
 
 bool collapse_invalid(Vertex* A, Vertex* B, Vertex* C, Vertex* D, const Point& E) {
-    // vertices whose adjacent edges we don't need to test (they're being removed or shared)
-    // vertices whose adjacent edges we don't need to test (they're being removed or shared)
-    std::unordered_set<Vertex*> skip = {A, B, C, D};
-    if (A->prev) skip.insert(A->prev);
+    // flat array instead of unordered_set — avoids heap allocation on every call
+    Vertex* skip[5] = {A, B, C, D, A->prev};
+    int skip_n = A->prev ? 5 : 4;
+    auto in_skip = [&](Vertex* v) {
+        for (int i = 0; i < skip_n; i++) if (skip[i] == v) return true;
+        return false;
+    };
 
     // bounding box of the two new edges A->E and E->D
     double lo_x = std::min({A->pos.x, E.x, D->pos.x});
@@ -270,7 +280,7 @@ bool collapse_invalid(Vertex* A, Vertex* B, Vertex* C, Vertex* D, const Point& E
 
     for (auto* v : nearby) {
         if (v->removed || v->next->removed) continue;
-        if (skip.count(v) || skip.count(v->next)) continue;
+        if (in_skip(v) || in_skip(v->next)) continue;
 
         // do the new edges cross this existing edge?
         if (edges_cross(A->pos, E, v->pos, v->next->pos)) return true;
@@ -281,7 +291,7 @@ bool collapse_invalid(Vertex* A, Vertex* B, Vertex* C, Vertex* D, const Point& E
     for (auto* v : nearby) {
         if (v->removed) continue;
         for (Vertex* cand : {v, v->next}) {
-            if (skip.count(cand) || cand->removed) continue;
+            if (in_skip(cand) || cand->removed) continue;
             if (point_on_seg(cand->pos, A->pos, E) ||
                 point_on_seg(cand->pos, E, D->pos))
                 return true;
@@ -428,7 +438,6 @@ double do_collapse(Vertex* B) {
 
     // create new vertex and splice it in
     Vertex* ve = new_vertex(E.x, E.y, ring);
-    vert_version.push_back(0);
     A->next = ve; ve->prev = A;
     ve->next = D; D->prev = ve;
     B->removed = true;
@@ -583,6 +592,10 @@ int main(int argc, char* argv[]) {
     auto raw = read_csv(argv[1]);
     auto t_parse_end = clock::now();
 
+    // pre-allocate: each collapse creates 1 Steiner point, so at most 2x vertices
+    all_vertices.reserve(raw.size() * 2);
+    vert_version.reserve(raw.size() * 2);
+
     // group vertices by ring
     std::unordered_map<int, std::vector<Point>> rings;
     int max_ring = -1;
@@ -636,29 +649,32 @@ int main(int argc, char* argv[]) {
     // collapse with depth-1 look-ahead over top-k candidates
     // look-ahead is applied when remaining vertices are manageable;
     // for very large inputs early on, use plain greedy to stay fast
-    const int LOOKAHEAD_K = 5;
-    const int LOOKAHEAD_THRESHOLD = 200; // look-ahead for small polygon-with-holes inputs
+    const int LOOKAHEAD_THRESHOLD = 200;
     double total_disp = 0;
+    int stale_count = 0;       // track stale PQ pops for periodic rebuild
+    int collapse_count = 0;
     auto t_simplify_start = clock::now();
     while (total_verts > target && !pq.empty()) {
+        // adaptive look-ahead K: more candidates when fewer vertices remain
         bool use_lookahead = (total_verts <= LOOKAHEAD_THRESHOLD);
+        int lookahead_k = (total_verts <= 50) ? 8 : 5;
 
         if (!use_lookahead) {
             // plain greedy: just take the cheapest valid candidate
             auto top = pq.top(); pq.pop();
-            if (top.b_vert->removed) continue;
-            if (top.version != vert_version[top.b_vert->id]) continue;
+            if (top.b_vert->removed) { stale_count++; continue; }
+            if (top.version != vert_version[top.b_vert->id]) { stale_count++; continue; }
             if (ring_sizes[top.b_vert->ring_id] <= 3) continue;
             double d = do_collapse(top.b_vert);
-            if (d >= 0) total_disp += d;
+            if (d >= 0) { total_disp += d; collapse_count++; }
         } else {
             // look-ahead: collect top-k, evaluate neighborhood, pick best
             std::vector<Collapse> candidates;
-            candidates.reserve(LOOKAHEAD_K);
-            while ((int)candidates.size() < LOOKAHEAD_K && !pq.empty()) {
+            candidates.reserve(lookahead_k);
+            while ((int)candidates.size() < lookahead_k && !pq.empty()) {
                 auto top = pq.top(); pq.pop();
-                if (top.b_vert->removed) continue;
-                if (top.version != vert_version[top.b_vert->id]) continue;
+                if (top.b_vert->removed) { stale_count++; continue; }
+                if (top.version != vert_version[top.b_vert->id]) { stale_count++; continue; }
                 if (ring_sizes[top.b_vert->ring_id] <= 3) continue;
                 candidates.push_back(top);
             }
@@ -674,6 +690,7 @@ int main(int argc, char* argv[]) {
                     for (int i = 1; i < (int)candidates.size(); i++) {
                         if (candidates[i].cost > threshold) break;
                         double score = lookahead_score(candidates[i].b_vert);
+                        // early termination: skip remaining if already much worse
                         if (score < best_score) {
                             best_score = score;
                             best_idx = i;
@@ -687,7 +704,23 @@ int main(int argc, char* argv[]) {
             }
 
             double d = do_collapse(candidates[best_idx].b_vert);
-            if (d >= 0) total_disp += d;
+            if (d >= 0) { total_disp += d; collapse_count++; }
+        }
+
+        // periodic PQ rebuild: if stale entries dominate, rebuild to reduce wasted pops
+        if (stale_count > 500 && stale_count > collapse_count * 3) {
+            std::vector<Collapse> valid;
+            valid.reserve(pq.size() / 2);
+            while (!pq.empty()) {
+                auto top = pq.top(); pq.pop();
+                if (!top.b_vert->removed &&
+                    top.version == vert_version[top.b_vert->id] &&
+                    ring_sizes[top.b_vert->ring_id] > 3)
+                    valid.push_back(top);
+            }
+            for (auto& c : valid) pq.push(c);
+            stale_count = 0;
+            collapse_count = 0;
         }
     }
     auto t_simplify_end = clock::now();

@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -O2 -Wall -Wextra
+CXXFLAGS = -std=c++17 -O2 -march=native -flto -Wall -Wextra
 
 FILE ?= input.csv
 TARGET ?= 99
