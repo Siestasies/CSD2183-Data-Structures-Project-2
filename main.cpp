@@ -552,6 +552,21 @@ std::vector<RawVertex> read_csv(const std::string& path) {
     return out;
 }
 
+// reads VmPeak from /proc/self/status and returns peak virtual memory usage in kB,
+// or -1 if unavailable
+long get_peak_memory_kb() {
+    std::ifstream f("/proc/self/status");
+    std::string line;
+    while (std::getline(f, line)) {
+        if (line.rfind("VmPeak:", 0) == 0) {
+            long kb;
+            std::sscanf(line.c_str(), "VmPeak: %ld kB", &kb);
+            return kb;
+        }
+    }
+    return -1;
+}
+
 // --- main ---
 
 int main(int argc, char* argv[]) {
@@ -676,7 +691,7 @@ int main(int argc, char* argv[]) {
         }
     }
     auto t_simplify_end = clock::now();
-    
+
     // compute output area
     double output_area = 0;
     for (int r = 0; r <= max_ring; r++)
@@ -709,6 +724,7 @@ int main(int argc, char* argv[]) {
     std::cerr << "Time - Data setup:     " << ms(t_setup_end    - t_parse_end).count()      << " ms" << std::endl;
     std::cerr << "Time - Simplification: " << ms(t_simplify_end - t_simplify_start).count() << " ms" << std::endl;
     std::cerr << "Time - Total:          " << ms(t_simplify_end - t_parse_start).count()    << " ms" << std::endl;
+    std::cerr << "Peak memory:           " << get_peak_memory_kb()                          << " kB" << std::endl;
 
     for (auto* v : all_vertices) delete v;
     return 0;
