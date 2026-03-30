@@ -7,6 +7,11 @@ benchmark_outputs/
 *.txt
 !test_cases/*.txt
 
+# Python / Plots
+plot.png
+__pycache__/
+*.pyc
+
 # Valgrind
 massif.out
 massif_report.txt
