@@ -12,14 +12,13 @@ simplify: main.cpp
 run: simplify
 	./simplify $(DIR)/$(FILE) $(TARGET) > $(OUTPUT)
 
-memcheck: simplify
-	valgrind --tool=massif --massif-out-file=massif.out ./simplify $(DIR)/$(FILE) $(TARGET) > $(OUTPUT)
-	ms_print massif.out > massif_report.txt
+benchmark: simplify
+	bash benchmark.sh
 
 clean:
 	rm -f simplify massif.out massif_report.txt
 
-.PHONY: clean run memcheck
+.PHONY: clean run memcheck benchmark
 
 # can replace "run" with "memcheck"
 
