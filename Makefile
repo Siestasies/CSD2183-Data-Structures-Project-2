@@ -18,9 +18,7 @@ benchmark: simplify
 clean:
 	rm -f simplify massif.out massif_report.txt
 
-.PHONY: clean run memcheck benchmark
-
-# can replace "run" with "memcheck"
+.PHONY: clean run benchmark
 
 # for original test cases
 # make run DIR=test_cases FILE=input_original_01.csv TARGET=99 OUTPUT=my_output.txt

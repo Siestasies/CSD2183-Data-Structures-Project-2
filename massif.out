@@ -1,5 +1,5 @@
 desc: --massif-out-file=massif.out
-cmd: ./simplify test_cases/input_original_08.csv 99
+cmd: ./simplify generated_polygon_datasets/Vertexes_400000__Holes_3.csv 99
 time_unit: i
 #-----------
 snapshot=0
@@ -12,1244 +12,800 @@ heap_tree=empty
 #-----------
 snapshot=1
 #-----------
-time=5682082
-mem_heap_B=93779
-mem_heap_extra_B=85
+time=29689643
+mem_heap_B=179878
+mem_heap_extra_B=90
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=2
 #-----------
-time=9557380
-mem_heap_B=106080
-mem_heap_extra_B=88
+time=87789863
+mem_heap_B=474735
+mem_heap_extra_B=89
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=3
 #-----------
-time=14785552
-mem_heap_B=130657
-mem_heap_extra_B=87
+time=136128793
+mem_heap_B=867951
+mem_heap_extra_B=89
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=4
 #-----------
-time=19310616
-mem_heap_B=179804
-mem_heap_extra_B=92
+time=200090490
+mem_heap_B=867951
+mem_heap_extra_B=89
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=5
 #-----------
-time=23658770
-mem_heap_B=179810
-mem_heap_extra_B=86
+time=267790371
+mem_heap_B=1654439
+mem_heap_extra_B=105
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=6
 #-----------
-time=29504395
-mem_heap_B=179860
-mem_heap_extra_B=108
+time=303159810
+mem_heap_B=1654383
+mem_heap_extra_B=89
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=7
 #-----------
-time=33519359
-mem_heap_B=278108
-mem_heap_extra_B=92
+time=354865467
+mem_heap_B=1654384
+mem_heap_extra_B=88
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n3: 1654384 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 1572864 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+      n1: 72704 0x2: ???
+       n1: 72704 0x1FFF000352: ???
+        n1: 72704 0x1FFF00035D: ???
+         n0: 72704 0x1FFF000395: ???
+ n0: 8816 in 5 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=8
 #-----------
-time=39532376
-mem_heap_B=278113
-mem_heap_extra_B=87
+time=406574215
+mem_heap_B=1654384
+mem_heap_extra_B=88
 mem_stacks_B=0
-heap_tree=detailed
-n4: 278113 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n1: 8192 0x496C023: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 8192 0x4970015: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-   n1: 8192 0x10DA09: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 8192 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n0: 609 in 4 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=9
 #-----------
-time=47288596
-mem_heap_B=278107
-mem_heap_extra_B=93
+time=487113607
+mem_heap_B=3227248
+mem_heap_extra_B=88
 mem_stacks_B=0
-heap_tree=detailed
-n4: 278107 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n1: 8192 0x496C023: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 8192 0x4970015: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-   n1: 8192 0x10DA09: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 8192 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n0: 603 in 4 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=10
 #-----------
-time=52128844
-mem_heap_B=466064
-mem_heap_extra_B=64
+time=547960163
+mem_heap_B=3227247
+mem_heap_extra_B=89
 mem_stacks_B=0
-heap_tree=detailed
-n4: 466064 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 196608 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 196608 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n0: 144 in 7 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=11
 #-----------
-time=59816763
-mem_heap_B=1125028
-mem_heap_extra_B=61012
+time=590549953
+mem_heap_B=3227305
+mem_heap_extra_B=103
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=12
 #-----------
-time=64026814
-mem_heap_B=1223204
-mem_heap_extra_B=60964
+time=663559543
+mem_heap_B=3227306
+mem_heap_extra_B=102
 mem_stacks_B=0
-heap_tree=detailed
-n9: 1223204 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n2: 328800 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n2: 152264 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 86728 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n1: 147456 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 147456 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 147456 0x10B257: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 32768 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 32768 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 32768 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 32768 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n0: 156 in 14 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=13
 #-----------
-time=69609672
-mem_heap_B=1174148
-mem_heap_extra_B=61012
+time=718311368
+mem_heap_B=3227250
+mem_heap_extra_B=86
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=14
 #-----------
-time=73127627
-mem_heap_B=1174292
-mem_heap_extra_B=61044
+time=779339726
+mem_heap_B=3227250
+mem_heap_extra_B=86
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=15
 #-----------
-time=78643386
-mem_heap_B=1272604
-mem_heap_extra_B=61028
+time=830353641
+mem_heap_B=3227306
+mem_heap_extra_B=102
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=16
 #-----------
-time=82785551
-mem_heap_B=1272612
-mem_heap_extra_B=61044
+time=871162625
+mem_heap_B=3227305
+mem_heap_extra_B=103
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n3: 3227305 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 3145728 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+      n1: 72704 0x2: ???
+       n1: 72704 0x1FFF000352: ???
+        n1: 72704 0x1FFF00035D: ???
+         n0: 72704 0x1FFF000395: ???
+ n0: 8873 in 5 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=17
 #-----------
-time=88590523
-mem_heap_B=1274660
-mem_heap_extra_B=61372
+time=920848279
+mem_heap_B=9518705
+mem_heap_extra_B=4127
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n2: 9518705 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 9437184 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 81521 in 6 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=18
 #-----------
-time=92732233
-mem_heap_B=1279116
-mem_heap_extra_B=62108
+time=961656751
+mem_heap_B=6373034
+mem_heap_extra_B=4134
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=19
 #-----------
-time=96898857
-mem_heap_B=1283724
-mem_heap_extra_B=62924
+time=1012667717
+mem_heap_B=6372977
+mem_heap_extra_B=4119
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=20
 #-----------
-time=103019591
-mem_heap_B=1683572
-mem_heap_extra_B=63980
+time=1084083123
+mem_heap_B=6372977
+mem_heap_extra_B=4119
 mem_stacks_B=0
-heap_tree=detailed
-n9: 1683572 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n1: 589824 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 589824 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10B257: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n3: 346800 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 18000 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 18000 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n3: 152264 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 86728 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 32768 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 32768 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 32768 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 32768 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n0: 156 in 16 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=21
 #-----------
-time=109653702
-mem_heap_B=1494556
-mem_heap_extra_B=65260
+time=1135094867
+mem_heap_B=6372973
+mem_heap_extra_B=4107
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=22
 #-----------
-time=114393343
-mem_heap_B=1500460
-mem_heap_extra_B=66332
+time=1186106168
+mem_heap_B=6372974
+mem_heap_extra_B=4122
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=23
 #-----------
-time=118903434
-mem_heap_B=1537412
-mem_heap_extra_B=66940
+time=1226914186
+mem_heap_B=6373032
+mem_heap_extra_B=4136
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n3: 6373032 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 6291456 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+      n1: 72704 0x2: ???
+       n1: 72704 0x1FFF000352: ???
+        n1: 72704 0x1FFF00035D: ???
+         n0: 72704 0x1FFF000395: ???
+ n0: 8872 in 5 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=24
 #-----------
-time=123433414
-mem_heap_B=1542596
-mem_heap_extra_B=67804
+time=1288133217
+mem_heap_B=6372975
+mem_heap_extra_B=4121
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=25
 #-----------
-time=131334472
-mem_heap_B=1551452
-mem_heap_extra_B=69316
+time=1339153042
+mem_heap_B=6372975
+mem_heap_extra_B=4121
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=26
 #-----------
-time=135843492
-mem_heap_B=1558156
-mem_heap_extra_B=70580
+time=1400374094
+mem_heap_B=6373029
+mem_heap_extra_B=4123
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=27
 #-----------
-time=140353095
-mem_heap_B=1561620
-mem_heap_extra_B=70964
+time=1471798123
+mem_heap_B=6372974
+mem_heap_extra_B=4122
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=28
 #-----------
-time=144470091
-mem_heap_B=1697276
-mem_heap_extra_B=71740
+time=1553427216
+mem_heap_B=6372974
+mem_heap_extra_B=4122
 mem_stacks_B=0
-heap_tree=detailed
-n9: 1697276 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 393264 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 64464 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 64464 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 283344 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n3: 196608 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
-  n0: 86728 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 8 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 65536 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n0: 156 in 16 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=29
 #-----------
-time=150106552
-mem_heap_B=1638300
-mem_heap_extra_B=72852
+time=1614648369
+mem_heap_B=6373031
+mem_heap_extra_B=4137
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=30
 #-----------
-time=155742829
-mem_heap_B=1644636
-mem_heap_extra_B=73908
+time=1655463973
+mem_heap_B=6373030
+mem_heap_extra_B=4122
 mem_stacks_B=0
-heap_tree=detailed
-n9: 1644636 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 405888 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 77088 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 77088 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 217816 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86720 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 24 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 65568 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 32 in 1 place, below massif's threshold (1.00%)
- n0: 388 in 16 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=31
 #-----------
-time=161383478
-mem_heap_B=1651080
-mem_heap_extra_B=75072
+time=1716685684
+mem_heap_B=6373031
+mem_heap_extra_B=4137
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=32
 #-----------
-time=165893254
-mem_heap_B=1656372
-mem_heap_extra_B=75908
+time=1767704581
+mem_heap_B=6372974
+mem_heap_extra_B=4122
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=33
 #-----------
-time=171769170
-mem_heap_B=1663460
-mem_heap_extra_B=77108
+time=1825173874
+mem_heap_B=18955886
+mem_heap_extra_B=8162
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n2: 18955886 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 18874368 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 81518 in 6 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=34
 #-----------
-time=175388293
-mem_heap_B=1667460
-mem_heap_extra_B=77788
+time=1886398805
+mem_heap_B=12664431
+mem_heap_extra_B=4121
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=35
 #-----------
-time=180816977
-mem_heap_B=1674228
-mem_heap_extra_B=78980
+time=1968034144
+mem_heap_B=12664489
+mem_heap_extra_B=4135
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=36
 #-----------
-time=184436171
-mem_heap_B=1678756
-mem_heap_extra_B=79740
+time=2008853520
+mem_heap_B=12664432
+mem_heap_extra_B=4120
 mem_stacks_B=0
-heap_tree=detailed
-n9: 1678756 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 439440 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 110640 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 110640 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 217976 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86720 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 184 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 65536 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n0: 828 in 16 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=37
 #-----------
-time=189868930
-mem_heap_B=1684956
-mem_heap_extra_B=80708
+time=2090487237
+mem_heap_B=12664431
+mem_heap_extra_B=4121
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=38
 #-----------
-time=193488879
-mem_heap_B=1688684
-mem_heap_extra_B=81324
+time=2151712543
+mem_heap_B=12664431
+mem_heap_extra_B=4121
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=39
 #-----------
-time=200727198
-mem_heap_B=1697308
-mem_heap_extra_B=82780
+time=2233348747
+mem_heap_B=12664430
+mem_heap_extra_B=4122
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n2: 12664430 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 81518 in 6 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=40
 #-----------
-time=205794206
-mem_heap_B=1703348
-mem_heap_extra_B=83788
+time=2294574792
+mem_heap_B=12664431
+mem_heap_extra_B=4121
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=41
 #-----------
-time=213032485
-mem_heap_B=1711908
-mem_heap_extra_B=85220
+time=2376209436
+mem_heap_B=12664432
+mem_heap_extra_B=4120
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=42
 #-----------
-time=216655607
-mem_heap_B=1716308
-mem_heap_extra_B=85948
+time=2437435710
+mem_heap_B=12664433
+mem_heap_extra_B=4119
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n2: 12664433 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 81521 in 6 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=43
 #-----------
-time=223064740
-mem_heap_B=1723644
-mem_heap_extra_B=87196
+time=2478254024
+mem_heap_B=12664433
+mem_heap_extra_B=4119
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=44
 #-----------
-time=226683875
-mem_heap_B=1728100
-mem_heap_extra_B=87956
+time=2559889944
+mem_heap_B=12664433
+mem_heap_extra_B=4119
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=45
 #-----------
-time=232533303
-mem_heap_B=1735092
-mem_heap_extra_B=89204
+time=2621116335
+mem_heap_B=12664488
+mem_heap_extra_B=4136
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=46
 #-----------
-time=237961963
-mem_heap_B=1741396
-mem_heap_extra_B=90260
+time=2702754065
+mem_heap_B=12664431
+mem_heap_extra_B=4121
 mem_stacks_B=0
 heap_tree=empty
 #-----------
 snapshot=47
 #-----------
-time=244301369
-mem_heap_B=1749980
-mem_heap_extra_B=91772
+time=2784387104
+mem_heap_B=12664432
+mem_heap_extra_B=4120
 mem_stacks_B=0
-heap_tree=detailed
-n9: 1749980 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 510192 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 181392 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 181392 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 218432 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86672 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 688 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 65536 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n0: 844 in 16 places, all below massif's threshold (1.00%)
+heap_tree=empty
 #-----------
 snapshot=48
 #-----------
-time=251539492
-mem_heap_B=1757796
-mem_heap_extra_B=93036
+time=2863860538
+mem_heap_B=53514632
+mem_heap_extra_B=3210368
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n7: 53514632 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73096 in 11 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=49
 #-----------
-time=255160057
-mem_heap_B=1762172
-mem_heap_extra_B=93796
+time=2921435426
+mem_heap_B=78790576
+mem_heap_extra_B=3276248
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 78790576 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 25276024 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 25276024 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=50
 #-----------
-time=257523516
-mem_heap_B=1765724
-mem_heap_extra_B=94460
+time=2923121353
+mem_heap_B=79612816
+mem_heap_extra_B=3277824
 mem_stacks_B=0
 heap_tree=detailed
-n9: 1765724 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 526080 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 197280 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 197280 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 218232 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86656 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 504 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 65536 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n0: 900 in 16 places, all below massif's threshold (1.00%)
+n8: 79612816 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 26098264 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 26098264 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=51
 #-----------
-time=261041525
-mem_heap_B=1769124
-mem_heap_extra_B=94988
+time=2925173056
+mem_heap_B=80442552
+mem_heap_extra_B=3280152
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 80442552 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 26928000 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 26928000 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=52
 #-----------
-time=264559549
-mem_heap_B=1773476
-mem_heap_extra_B=95724
+time=2927305293
+mem_heap_B=81278360
+mem_heap_extra_B=3282752
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 81278360 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 27763808 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 27763808 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=53
 #-----------
-time=268077550
-mem_heap_B=1777772
-mem_heap_extra_B=96436
+time=2930029487
+mem_heap_B=82120144
+mem_heap_extra_B=3287632
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 82120144 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 28605592 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 28605592 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=54
 #-----------
-time=271020053
-mem_heap_B=1781852
-mem_heap_extra_B=97188
+time=2932125022
+mem_heap_B=82971752
+mem_heap_extra_B=3290256
 mem_stacks_B=0
 heap_tree=detailed
-n9: 1781852 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 542160 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 213360 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 213360 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 218280 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86656 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 552 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n2: 65536 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 65536 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 65536 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 65536 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n0: 900 in 16 places, all below massif's threshold (1.00%)
+n8: 82971752 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 29457200 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 29457200 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=55
 #-----------
-time=274539059
-mem_heap_B=1785444
-mem_heap_extra_B=97748
+time=2934308267
+mem_heap_B=83833904
+mem_heap_extra_B=3292544
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 83833904 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 30319352 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 30319352 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=56
 #-----------
-time=278057218
-mem_heap_B=1789556
-mem_heap_extra_B=98428
+time=2936089959
+mem_heap_B=84704496
+mem_heap_extra_B=3294368
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 84704496 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 31189944 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 31189944 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=57
 #-----------
-time=281575252
-mem_heap_B=1794072
-mem_heap_extra_B=99280
+time=2937887271
+mem_heap_B=85588528
+mem_heap_extra_B=3296032
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 85588528 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 32073976 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 32073976 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=58
 #-----------
-time=283937125
-mem_heap_B=1927684
-mem_heap_extra_B=99708
+time=2939722007
+mem_heap_B=86475992
+mem_heap_extra_B=3297672
 mem_stacks_B=0
 heap_tree=detailed
-n9: 1927684 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 557664 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 228864 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 228864 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 218280 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86632 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 576 in 2 places, all below massif's threshold (1.00%)
- n2: 196608 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 196608 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 196608 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 196608 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n0: 156 in 16 places, all below massif's threshold (1.00%)
+n8: 86475992 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 32961440 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 32961440 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=59
 #-----------
-time=287455165
-mem_heap_B=1866676
-mem_heap_extra_B=100500
+time=2941552639
+mem_heap_B=87373424
+mem_heap_extra_B=3299288
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 87373424 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33858872 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 33858872 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=60
 #-----------
-time=290973127
-mem_heap_B=1871180
-mem_heap_extra_B=101276
+time=2943382801
+mem_heap_B=88279000
+mem_heap_extra_B=3301032
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 88279000 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 34764448 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 34764448 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=61
 #-----------
-time=294491199
-mem_heap_B=1875500
-mem_heap_extra_B=102044
+time=2945193524
+mem_heap_B=89193688
+mem_heap_extra_B=3302712
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 89193688 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 35679136 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 35679136 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=62
 #-----------
-time=298009373
-mem_heap_B=1879708
-mem_heap_extra_B=102812
+time=2947413351
+mem_heap_B=90117872
+mem_heap_extra_B=3305208
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 90117872 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 36603320 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 36603320 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=63
 #-----------
-time=301527390
-mem_heap_B=1884724
-mem_heap_extra_B=103804
+time=2949777906
+mem_heap_B=91048968
+mem_heap_extra_B=3308592
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 91048968 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 37534416 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 37534416 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=64
 #-----------
-time=305045454
-mem_heap_B=1889108
-mem_heap_extra_B=104612
+time=2955940374
+mem_heap_B=91993736
+mem_heap_extra_B=3310232
 mem_stacks_B=0
-heap_tree=empty
+heap_tree=detailed
+n8: 91993736 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 38479184 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 38479184 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
 #-----------
 snapshot=65
 #-----------
-time=308563449
-mem_heap_B=1893456
-mem_heap_extra_B=105400
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=66
-#-----------
-time=312081799
-mem_heap_B=1897740
-mem_heap_extra_B=106100
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=67
-#-----------
-time=315599839
-mem_heap_B=1902316
-mem_heap_extra_B=106996
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=68
-#-----------
-time=319118444
-mem_heap_B=1906516
-mem_heap_extra_B=107732
-mem_stacks_B=0
-heap_tree=detailed
-n9: 1906516 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 601392 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 272592 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 272592 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 218880 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86560 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 1248 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n2: 131072 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n0: 196 in 16 places, all below massif's threshold (1.00%)
-#-----------
-snapshot=69
-#-----------
-time=322636429
-mem_heap_B=1911508
-mem_heap_extra_B=108684
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=70
-#-----------
-time=326154438
-mem_heap_B=1915828
-mem_heap_extra_B=109524
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=71
-#-----------
-time=329672518
-mem_heap_B=1920324
-mem_heap_extra_B=110420
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=72
-#-----------
-time=333190566
-mem_heap_B=1925188
-mem_heap_extra_B=111452
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=73
-#-----------
-time=336708667
-mem_heap_B=1930204
-mem_heap_extra_B=112660
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=74
-#-----------
-time=339767450
-mem_heap_B=1934316
-mem_heap_extra_B=113508
-mem_stacks_B=0
-heap_tree=detailed
-n9: 1934316 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 627504 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 298704 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 298704 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 220176 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86512 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 2592 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n2: 131072 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n0: 588 in 16 places, all below massif's threshold (1.00%)
-#-----------
-snapshot=75
-#-----------
-time=343285439
-mem_heap_B=1939068
-mem_heap_extra_B=114700
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=76
-#-----------
-time=346803425
-mem_heap_B=1944012
-mem_heap_extra_B=116076
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=77
-#-----------
-time=350321453
-mem_heap_B=1949524
-mem_heap_extra_B=118020
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=78
-#-----------
-time=350680125
-mem_heap_B=1950268
-mem_heap_extra_B=118172
-mem_stacks_B=0
-heap_tree=detailed
-n9: 1950268 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 641376 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 312576 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 312576 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 222256 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86416 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 4768 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n2: 131072 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n0: 588 in 16 places, all below massif's threshold (1.00%)
-#-----------
-snapshot=79
-#-----------
-time=354198690
-mem_heap_B=1954852
-mem_heap_extra_B=119692
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=80
-#-----------
-time=357716677
-mem_heap_B=1959956
-mem_heap_extra_B=121996
-mem_stacks_B=0
-heap_tree=empty
-#-----------
-snapshot=81
-#-----------
-time=360834522
-mem_heap_B=1964300
-mem_heap_extra_B=124828
+time=2962683460
+mem_heap_B=92947368
+mem_heap_extra_B=3311384
 mem_stacks_B=0
 heap_tree=peak
-n9: 1964300 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
- n3: 651840 0x10D3F1: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 328752 0x10D520: build_ring(std::vector<Point, std::allocator<Point> > const&, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 328752 0x10ADA2: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 323040 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 319200 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 3840 in 1 place, below massif's threshold (1.00%)
-  n0: 48 in 1 place, below massif's threshold (1.00%)
- n1: 393216 0x111B03: void std::vector<Collapse, std::allocator<Collapse> >::_M_realloc_insert<Collapse>(__gnu_cxx::__normal_iterator<Collapse*, std::vector<Collapse, std::allocator<Collapse> > >, Collapse&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 393216 0x10F608: push_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 393216 0x110135: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 393216 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 1 place, below massif's threshold (1.00%)
- n3: 225816 0x1108D2: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D498: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 86360 0x10B1C9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 8384 in 2 places, all below massif's threshold (1.00%)
- n1: 196608 0x110DBA: void std::vector<RawVertex, std::allocator<RawVertex> >::_M_realloc_insert<RawVertex const&>(__gnu_cxx::__normal_iterator<RawVertex*, std::vector<RawVertex, std::allocator<RawVertex> > >, RawVertex const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n1: 196608 0x10DFB4: read_csv(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 196608 0x10AB66: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 161376 0x11077A: std::vector<std::vector<Vertex*, std::allocator<Vertex*> >, std::allocator<std::vector<Vertex*, std::allocator<Vertex*> > > >::_M_default_append(unsigned long) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 161376 0x10BC93: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n2: 131072 0x10C5EE: int& std::vector<int, std::allocator<int> >::emplace_back<int>(int&&) [clone .isra.0] (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n2: 131072 0x10D467: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n1: 131072 0x11002C: do_collapse(Vertex*) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-    n0: 131072 0x10B313: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-   n0: 0 in 2 places, all below massif's threshold (1.00%)
-  n0: 0 in 1 place, below massif's threshold (1.00%)
- n1: 131072 0x111963: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
-  n0: 131072 0x10AC72: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
- n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
-   n1: 72704 0x4006567: call_init (dl-init.c:33)
-    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
-     n1: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
-      n1: 72704 0x2: ???
-       n1: 72704 0x1FFF000382: ???
-        n1: 72704 0x1FFF00038D: ???
-         n0: 72704 0x1FFF0003AE: ???
- n0: 596 in 17 places, all below massif's threshold (1.00%)
+n8: 92947368 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 39432816 0x10E82A: void std::vector<Vertex*, std::allocator<Vertex*> >::_M_realloc_insert<Vertex* const&>(__gnu_cxx::__normal_iterator<Vertex**, std::vector<Vertex*, std::allocator<Vertex*> > >, Vertex* const&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 39432816 0x10B708: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n2: 19200000 0x10FC3D: new_vertex(double, double, int) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 19199808 0x10B2FC: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 192 in 1 place, below massif's threshold (1.00%)
+ n0: 12582912 0x10C2AE: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n1: 10485760 0x10DF16: void std::vector<Point, std::allocator<Point> >::_M_realloc_insert<Point>(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, Point&&) (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+  n0: 10485760 0x10B18D: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 6400000 0x10AFC9: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 3200000 0x10B050: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 1572864 0x10C783: main (in /mnt/c/GGpen/CSD2183-Data-Structures-Project-2/simplify)
+ n0: 73016 in 10 places, all below massif's threshold (1.00%)
