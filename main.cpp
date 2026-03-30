@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <chrono>
 
 struct Point {
     double x, y;
@@ -560,7 +561,12 @@ int main(int argc, char* argv[]) {
     }
 
     int target = std::atoi(argv[2]);
+    using clock = std::chrono::high_resolution_clock;
+    using ms = std::chrono::duration<double, std::milli>;
+
+    auto t_parse_start = clock::now();
     auto raw = read_csv(argv[1]);
+    auto t_parse_end = clock::now();
 
     // group vertices by ring
     std::unordered_map<int, std::vector<Point>> rings;
@@ -610,12 +616,15 @@ int main(int argc, char* argv[]) {
         do { push_collapse(v); v = v->next; } while (v != ring_heads[r]);
     }
 
+    auto t_setup_end = clock::now();
+
     // collapse with depth-1 look-ahead over top-k candidates
     // look-ahead is applied when remaining vertices are manageable;
     // for very large inputs early on, use plain greedy to stay fast
     const int LOOKAHEAD_K = 5;
     const int LOOKAHEAD_THRESHOLD = 200; // look-ahead for small polygon-with-holes inputs
     double total_disp = 0;
+    auto t_simplify_start = clock::now();
     while (total_verts > target && !pq.empty()) {
         bool use_lookahead = (total_verts <= LOOKAHEAD_THRESHOLD);
 
@@ -666,7 +675,8 @@ int main(int argc, char* argv[]) {
             if (d >= 0) total_disp += d;
         }
     }
-
+    auto t_simplify_end = clock::now();
+    
     // compute output area
     double output_area = 0;
     for (int r = 0; r <= max_ring; r++)
@@ -693,6 +703,12 @@ int main(int argc, char* argv[]) {
               << std::scientific << std::setprecision(6) << output_area << std::endl;
     std::cout << "Total areal displacement: "
               << std::scientific << std::setprecision(6) << total_disp << std::endl;
+
+    std::cerr << std::fixed << std::setprecision(3);
+    std::cerr << "Time - CSV parsing:    " << ms(t_parse_end    - t_parse_start).count()    << " ms" << std::endl;
+    std::cerr << "Time - Data setup:     " << ms(t_setup_end    - t_parse_end).count()      << " ms" << std::endl;
+    std::cerr << "Time - Simplification: " << ms(t_simplify_end - t_simplify_start).count() << " ms" << std::endl;
+    std::cerr << "Time - Total:          " << ms(t_simplify_end - t_parse_start).count()    << " ms" << std::endl;
 
     for (auto* v : all_vertices) delete v;
     return 0;
