@@ -16,9 +16,9 @@ get_target() {
     esac
 }
 
-printf "%-45s %10s %12s %12s %12s %12s\n" \
-    "File" "Vertices" "Parse(ms)" "Setup(ms)" "Simplify(ms)" "Memory(kB)"
-printf '%s\n' "$(printf '%.0s-' {1..115})"
+printf "%-45s %10s %12s %12s %12s %12s %12s\n" \
+    "File" "Vertices" "Parse(ms)" "Setup(ms)" "Simplify(ms)" "Total(ms)" "Memory(kB)"
+printf '%s\n' "$(printf '%.0s-' {1..125})"
 
 for csv in "$DIR"/input_*.csv; do
     filename=$(basename "$csv")
@@ -31,11 +31,12 @@ for csv in "$DIR"/input_*.csv; do
     stderr_out=$(cat "$tmpfile")
     rm "$tmpfile"
 
-    parse_ms=$(echo    "$stderr_out" | grep "CSV parsing"    | awk '{print $4}')
-    setup_ms=$(echo    "$stderr_out" | grep "Data setup"     | awk '{print $4}')
+    parse_ms=$(echo    "$stderr_out" | grep "CSV parsing"    | awk '{print $5}')
+    setup_ms=$(echo    "$stderr_out" | grep "Data setup"     | awk '{print $5}')
     simplify_ms=$(echo "$stderr_out" | grep "Simplification" | awk '{print $4}')
+    total_ms=$(echo    "$stderr_out" | grep "Total"          | awk '{print $4}')
     memory_kb=$(echo   "$stderr_out" | grep "Peak memory"    | awk '{print $3}')
 
-    printf "%-45s %10d %12s %12s %12s %12s\n" \
-        "$filename" "$n_verts" "$parse_ms" "$setup_ms" "$simplify_ms" "$memory_kb"
+    printf "%-45s %10d %12s %12s %12s %12s %12s\n" \
+        "$filename" "$n_verts" "$parse_ms" "$setup_ms" "$simplify_ms" "$total_ms" "$memory_kb"
 done
