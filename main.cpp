@@ -752,12 +752,12 @@ int main(int argc, char* argv[]) {
     std::cout << "Total areal displacement: "
               << std::scientific << std::setprecision(6) << total_disp << std::endl;
 
-    std::cerr << std::fixed << std::setprecision(3);
-    std::cerr << "Time - CSV parsing:    " << ms(t_parse_end    - t_parse_start).count()    << " ms" << std::endl;
-    std::cerr << "Time - Data setup:     " << ms(t_setup_end    - t_parse_end).count()      << " ms" << std::endl;
-    std::cerr << "Time - Simplification: " << ms(t_simplify_end - t_simplify_start).count() << " ms" << std::endl;
-    std::cerr << "Time - Total:          " << ms(t_simplify_end - t_parse_start).count()    << " ms" << std::endl;
-    std::cerr << "Peak memory:           " << get_peak_memory_kb()                          << " kB" << std::endl;
+    std::cout << std::fixed << std::setprecision(3);
+    std::cout << "Time - CSV parsing:    " << ms(t_parse_end    - t_parse_start).count()    << " ms" << std::endl;
+    std::cout << "Time - Data setup:     " << ms(t_setup_end    - t_parse_end).count()      << " ms" << std::endl;
+    std::cout << "Time - Simplification: " << ms(t_simplify_end - t_simplify_start).count() << " ms" << std::endl;
+    std::cout << "Time - Total:          " << ms(t_simplify_end - t_parse_start).count()    << " ms" << std::endl;
+    std::cout << "Peak memory:           " << get_peak_memory_kb()                          << " kB" << std::endl;
 
     for (auto* v : all_vertices) delete v;
     return 0;
