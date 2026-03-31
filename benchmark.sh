@@ -25,9 +25,11 @@ for csv in "$DIR"/input_*.csv; do
     target=$(get_target "$filename")
     n_verts=$(( $(wc -l < "$csv") - 1 ))
 
-    # capture all stdout (polygon data + timing) into output file
-    "$SIMPLIFY" "$csv" "$target" > "$OUTPUT_DIR/${filename%.csv}_output.txt"
-    stdout_out=$(cat "$OUTPUT_DIR/${filename%.csv}_output.txt")
+    # stdout -> output file, stderr -> variable
+    tmpfile=$(mktemp)
+    "$SIMPLIFY" "$csv" "$target" > "$OUTPUT_DIR/${filename%.csv}_output.txt" 2>"$tmpfile"
+    stderr_out=$(cat "$tmpfile")
+    rm "$tmpfile"
 
     parse_ms=$(echo    "$stderr_out" | grep "CSV parsing"    | awk '{print $5}')
     setup_ms=$(echo    "$stderr_out" | grep "Data setup"     | awk '{print $5}')

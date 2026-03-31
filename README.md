@@ -35,33 +35,6 @@ The basic idea is to repeatedly collapse pairs of adjacent vertices into a singl
 - **Grid-based spatial index** speeds up intersection checks so the program can handle large inputs (100K+ vertices) without grinding to a halt.
 - **Topology checks** run before every collapse to make sure no new edges would cross existing ones, and no vertex ends up sitting on an edge.
 
-## Benchmarking
-
-Run all test cases and print a timing/memory table:
-
-```bash
-make benchmark
-```
-
-This executes `benchmark.sh`, which runs `simplify` on every `test_cases/input_*.csv` file with pre-set target vertex counts and reports parse time, setup time, simplification time, and peak memory for each. Results are also saved to `benchmark_outputs/`.
-
-## Plotting (Python)
-
-Visualise a before/after comparison of an input and its simplified output:
-
-```bash
-python3 plot.py <input.csv> <output.txt>
-```
-
-For example:
-
-```bash
-./simplify test_cases/input_original_01.csv 99 > my_output.txt
-python3 plot.py test_cases/input_original_01.csv my_output.txt
-```
-
-This opens a side-by-side plot and saves it as `plot.png`. Requires `matplotlib` (`pip install matplotlib`).
-
 ## Testing
 
 The `test_cases/` folder has a bunch of test inputs and their expected outputs. Simple polygons, polygons with holes, and larger lake outlines. All tests pass with area preserved exactly (within floating-point tolerance) and no topology violations.
