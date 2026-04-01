@@ -14,7 +14,9 @@ run: simplify
 
 benchmark: simplify
 	sed -i 's/\r//' benchmark.sh
-	bash benchmark.sh
+	bash benchmark.sh $(DIR)
+#default DIR set to test_cases
+# make benchmark DIR=generated_polygon_datasets for the other one
 
 clean:
 	rm -f simplify massif.out massif_report.txt

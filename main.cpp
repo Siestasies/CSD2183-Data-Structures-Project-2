@@ -744,7 +744,7 @@ int main(int argc, char* argv[]) {
             v = v->next;
         } while (v != ring_heads[r]);
     }
-
+    std::cout << std::endl;
     std::cout << "Total signed area in input: "
               << std::scientific << std::setprecision(6) << input_area << std::endl;
     std::cout << "Total signed area in output: "

@@ -1,0 +1,16 @@
+file,vertices,parse_ms,setup_ms,simplify_ms,total_ms,memory_kb
+input_blob_with_two_holes.csv,36,1.807,0.024,0.069,1.901,6088
+input_cushion_with_hexagonal_hole.csv,22,1.659,0.018,0.032,1.709,6088
+input_lake_with_two_islands.csv,81,1.575,0.041,0.253,1.870,6088
+input_original_01.csv,1860,3.689,0.617,5.067,9.373,6696
+input_original_02.csv,8605,10.779,2.901,30.226,43.906,8768
+input_original_03.csv,74559,82.726,23.997,258.245,364.968,28116
+input_original_04.csv,6733,8.538,2.455,19.088,30.082,8072
+input_original_05.csv,6230,7.993,2.080,17.392,27.466,7960
+input_original_06.csv,14122,16.043,4.886,45.587,66.515,10248
+input_original_07.csv,10596,12.443,3.413,27.362,43.218,9560
+input_original_08.csv,6850,8.687,2.263,17.671,28.621,8084
+input_original_09.csv,409998,456.713,162.352,3910.113,4529.177,118452
+input_original_10.csv,9899,15.214,3.310,28.047,46.571,9444
+input_rectangle_with_two_holes.csv,12,1.649,0.011,0.011,1.671,6088
+input_wavy_with_three_holes.csv,43,1.542,0.035,0.121,1.698,6088

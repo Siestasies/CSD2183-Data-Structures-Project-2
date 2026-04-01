@@ -1,8 +1,9 @@
 #!/bin/bash
  
 SIMPLIFY=./simplify
-DIR=test_cases
+DIR=${1:-test_cases}
 OUTPUT_DIR=benchmark_outputs
+CSV_OUT=benchmark_results.csv
 mkdir -p "$OUTPUT_DIR"
  
 get_target() {
@@ -16,11 +17,15 @@ get_target() {
     esac
 }
  
+# write CSV header
+echo "file,vertices,parse_ms,setup_ms,simplify_ms,total_ms,memory_kb" > "$CSV_OUT"
+ 
+# print console header
 printf "%-45s %10s %12s %12s %12s %12s %12s\n" \
     "File" "Vertices" "Parse(ms)" "Setup(ms)" "Simplify(ms)" "Total(ms)" "Memory(kB)"
 printf '%s\n' "$(printf '%.0s-' {1..125})"
  
-for csv in "$DIR"/input_*.csv; do
+for csv in "$DIR"/*.csv; do
     filename=$(basename "$csv")
     target=$(get_target "$filename")
     n_verts=$(( $(wc -l < "$csv") - 1 ))
@@ -43,6 +48,13 @@ for csv in "$DIR"/input_*.csv; do
     total_ms=$(echo    "$stderr_out" | grep "Total"          | awk '{print $4}')
     memory_kb=$(echo   "$stderr_out" | grep "Peak memory"    | awk '{print $3}')
  
+    # print to console
     printf "%-45s %10d %12s %12s %12s %12s %12s\n" \
         "$filename" "$n_verts" "$parse_ms" "$setup_ms" "$simplify_ms" "$total_ms" "$memory_kb"
+ 
+    # append to CSV
+    echo "$filename,$n_verts,$parse_ms,$setup_ms,$simplify_ms,$total_ms,$memory_kb" >> "$CSV_OUT"
 done
+ 
+echo ""
+echo "Results saved to $CSV_OUT"
