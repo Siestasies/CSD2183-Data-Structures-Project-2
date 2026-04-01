@@ -13,6 +13,7 @@ run: simplify
 	./simplify $(DIR)/$(FILE) $(TARGET) > $(OUTPUT)
 
 benchmark: simplify
+	sed -i 's/\r//' benchmark.sh
 	bash benchmark.sh
 
 clean:
