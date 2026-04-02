@@ -59,7 +59,7 @@ All test cases pass with area preserved exactly (within floating-point tolerance
 | original_09 | 409,998 | 99 | 99 | 6.321472e+10 | 6.321472e+10 | Yes | 3.362863e+09 |
 | original_10 | 9,899 | 99 | 99 | 5.066884e+08 | 5.066884e+08 | Yes | 2.841795e+07 |
 
-All 15 test cases preserve area exactly (input area = output area) and produce no self-intersections or ring crossings.
+All 15 test cases preserve area exactly (input area = output area) and produce no self-intersections or ring crossings. Where the output vertex count exceeds the target (e.g., rectangle_with_two_holes), this is because each ring requires a minimum of 3 vertices to remain a valid polygon.
 
 ### Performance Benchmarks (Instructor Test Cases)
 
@@ -97,3 +97,15 @@ To further validate scalability, we tested on generated polygon datasets with up
 | 400,000 | 3 | 10,461.975 | 11,014.428 | 146,100 |
 
 All generated dataset tests also preserve area exactly with no topology violations.
+
+### Visualization
+
+A Python script (`visualize.py`) is included to plot the original and simplified polygons side by side using matplotlib.
+
+```bash
+python3 visualize.py <input.csv> <output.txt> [save_path.png]
+```
+
+Example using the blob with two holes test case (36 → 17 vertices):
+
+![APSC Polygon Simplification](sample_visualization.png)
