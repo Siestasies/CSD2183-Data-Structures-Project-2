@@ -23,7 +23,18 @@ This gives you a `simplify` executable in the project root.
 - `input_file.csv` - a CSV file with columns `ring_id,vertex_id,x,y`
 - `target_vertices` - how many vertices you want in the simplified result
 
-The output goes to stdout: a CSV of the simplified polygon, followed by three lines showing the original area, simplified area and the areal displacement between them.
+The output goes to stdout: a CSV of the simplified polygon, followed by three lines showing the original area, simplified area and the areal displacement between them. Timing and memory stats are printed to stderr.
+
+## Benchmarking
+
+```bash
+bash benchmark.sh [test_cases_dir]
+```
+
+The benchmark script runs `simplify` on every CSV in the given directory (defaults to `test_cases/`) and produces two kinds of output:
+
+- **`benchmark_outputs/*.txt`** — the full stdout of each run (simplified polygon CSV + area stats)
+- **`benchmark_results.csv`** — a summary CSV with columns: `file, vertices, parse_ms, setup_ms, simplify_ms, total_ms, memory_kb`
 
 ## How It Works
 
