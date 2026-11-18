@@ -1,6 +1,6 @@
 # Area- and Topology-Preserving Polygon Simplification
 
-APSC (Area-Preserving Segment Collapse) algorithm based on the paper by Kronenfeld et al. (2020) for CSD2183 Data Structures Assignment 2.
+APSC (Area-Preserving Segment Collapse) algorithm based on the paper by Kronenfeld et al. (2020) for CSD2183 Data Structures Assignment 2 (AI-integrated coursework).
 
 The goal is to reduce the number of vertices in a polygon while keeping the total area exactly the same and making sure no edges cross or overlap. It handles polygons with holes too.
 
